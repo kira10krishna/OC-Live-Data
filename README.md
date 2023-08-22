@@ -1,7 +1,9 @@
 # OC-Live-Data
-Option chain live data save for each min whenever the market is open
+Option chain live data display/save for each min whenever the market is open
 
-What does it do ?
+There are some excel files for daily analysis of Stock EOD Analysis and OC Live data (refreshed each min, not saved)
+
+What does this .ipynb it do ?
 - Running this programs saves the option chain live data every single minute with self adjusting sleep timer for a minute
 - Data is exported to excel file. Everyday a new excel file will be created
 - Data is saved within the "Save data" folder. If no folder is there then it creates one
@@ -11,5 +13,10 @@ What does it do ?
 Upcoming Updates:
 - Adding hoidays list and excute program only on non-holidays
 - Add progress bar widget
+- Make python application instead of jupyter notebook file
+- Display live charts through JS
+
 
 Just run the program and enjoy.
+
+Feel free to comment on the code
