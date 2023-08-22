@@ -10,5 +10,6 @@ What does it do ?
 
 Upcoming Updates:
 - Adding hoidays list and excute program only on non-holidays
+- Add progress bar widget
 
 Just run the program and enjoy.
