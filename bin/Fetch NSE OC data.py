@@ -344,13 +344,6 @@ def is_market_open():
     return start_time <= current_time <= end_time
 
 
-
-# Start time for the script (9:00 AM) and end time (3:30 PM)
-start_time = datetime.time(9, 0)
-end_time = datetime.time(19, 40)
-
-
-
 # Main function to fetch and process data
 def main():
     try:
@@ -393,5 +386,8 @@ def main():
         logging.error(traceback.format_exc())      # traceback.print_exc()
 
 if __name__ == "__main__":
+    # Start time for the script (9:00 AM) and end time (3:30 PM)
+    start_time = datetime.time(9, 0)
+    end_time = datetime.time(19, 40)
     main()
 
