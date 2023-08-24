@@ -7,15 +7,20 @@ import os
 app = Flask(__name__)
 CORS(app)
 
+
 # Replace this with your actual data file path
-folder_path = os.path.join("data", f"Data for {(datetime.date.today()).strftime('%d-%b-%Y')}")
+folder_path = os.path.join("saved data", f"Data for {(datetime.date.today()).strftime('%d-%b-%Y')}")
 # data_file_path = 'data/chart_data.xlsx'
 # data_file_path = os.path.join(folder_path, f"{filename}_{expiry_date}.xlsx")
-data_file_path = os.path.join(folder_path, "Nifty_Data_24-Jul-2023.xlsx")
+data_file_path = os.path.join(folder_path, "Nifty_Data_31-Aug-2023.xlsx")
 
 
 # Load data from Excel file
 data_df = pd.read_excel(data_file_path)
+
+@app.route('/')
+def index():
+    return jsonify(data_df)
 
 @app.route('/api/getChartData', methods=['GET'])
 def get_chart_data():
