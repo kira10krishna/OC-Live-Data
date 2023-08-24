@@ -301,7 +301,8 @@ def fetch_and_process_data(exp_date):
 # Export data to Excel method
 def export_to_excel(df, filename, expiry_date):
     # Create folder if Saved data folder does not exist
-    folder_path = os.path.join("C:\\Users\\kira1\\Documents\\Python Scripts\\Saved Data", f"Data for {datetime.date.today().strftime('%d-%b-%Y')}")
+    # folder_path = os.path.join("C:\\Users\\kira1\\Documents\\Python Scripts\\Saved Data", f"Data for {datetime.date.today().strftime('%d-%b-%Y')}")
+    folder_path = os.path.join("backend\\data", f"Data for {datetime.date.today().strftime('%d-%b-%Y')}")
     if not os.path.exists(folder_path):
         try:
             os.makedirs(folder_path)

@@ -20,3 +20,6 @@ Upcoming Updates:
 Just run the program and enjoy.
 
 Feel free to comment on the code
+
+Manual code entries needed to be changed: (for self)
+- File name from which chart data is fetched
