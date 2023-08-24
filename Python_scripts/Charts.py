@@ -1,7 +1,7 @@
 
 import os
 import pandas as pd
-file_path = os.path.join("C:\\Users\\kira1\\Documents\\Python Scripts\\Saved data\\Data for 27-Jul-2023", "Nifty_Data_27-Jul-2023.xlsx")
+file_path = os.path.join("backend\\data\\Data for 24-Aug-2023", "Nifty_Data_24-Aug-2023.xlsx")
 df = pd.read_excel(file_path)
 
 import plotly.graph_objs as go
