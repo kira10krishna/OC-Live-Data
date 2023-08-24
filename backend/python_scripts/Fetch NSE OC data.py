@@ -5,7 +5,7 @@ import math
 import pandas as pd
 import datetime
 import time
-import schedule
+# import schedule
 import os
 import logging
 import traceback
@@ -39,7 +39,7 @@ headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/
 
 
 # Set up the logging
-log_file_path = os.path.join("python_Scripts", "script_log.txt")
+log_file_path = os.path.join("backend","python_Scripts", "script_log.txt")
 logging.basicConfig(
     filename=log_file_path,
     level=logging.INFO,
@@ -306,7 +306,7 @@ def fetch_and_process_data(exp_date):
 def export_to_excel(df, filename, expiry_date):
     # Create folder if Saved data folder does not exist
     # folder_path = os.path.join("C:\\Users\\kira1\\Documents\\Python Scripts\\Saved Data", f"Data for {datetime.date.today().strftime('%d-%b-%Y')}")
-    folder_path = os.path.join("backend\\data", f"Data for {datetime.date.today().strftime('%d-%b-%Y')}")
+    folder_path = os.path.join("backend\\saved data", f"Data for {datetime.date.today().strftime('%d-%b-%Y')}")
     if not os.path.exists(folder_path):
         try:
             os.makedirs(folder_path)
@@ -349,6 +349,63 @@ def is_market_open():
     return start_time <= current_time <= end_time
 
 
+# Function to store nf_SP and bnf_SP in the database
+def store_strike_prices(nf_SP, bnf_SP):
+    current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    folder_path = os.path.join(current_dir,"DB files")
+    
+    if not os.path.exists(folder_path):
+        try:
+            os.makedirs(folder_path)
+            # print("Created 'DB files' folder.")
+            logging.info("Created 'DB files' folder.")
+        except Exception as e:
+            # print("Error creating 'Saved data' folder:", e)
+            logging.info("Error creating 'Saved data' folder: %s", e)
+
+    file_path = os.path.join(folder_path,'strike_prices.db')
+    conn = sqlite3.connect(file_path)
+    cursor = conn.cursor()
+    # Create a table to store nf_SP and bnf_SP
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS strike_prices (
+            id INTEGER PRIMARY KEY,
+            dateTime DATETIME,
+            nf_SP REAL,
+            bnf_SP REAL
+        )
+    ''')
+    conn.commit()
+    
+    # Insert or update the nf_SP and bnf_SP values in the database
+    cursor.execute("INSERT INTO strike_prices (dateTime, nf_SP, bnf_SP) VALUES (datetime('now', 'localtime'), ?, ?)", (nf_SP, bnf_SP))
+    
+    conn.commit()
+    conn.close()
+
+# def fetch_strike_prices():
+#     try:
+#         current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+#         file_path = os.path.join(current_dir,"DB files",'strike_prices.db')
+#         conn = sqlite3.connect(file_path)
+#         cursor = conn.cursor()
+
+#         # Retrieve the nf_SP and bnf_SP values from the database
+#         cursor.execute('SELECT dateTime, nf_SP, bnf_SP FROM strike_prices ORDER BY dateTime DESC LIMIT 1')
+#         result = cursor.fetchone()
+
+#         conn.close()
+
+#         if result:
+#             dateTime, nf_SP, bnf_SP = result
+#             return dateTime, nf_SP, bnf_SP
+#         else:
+#             return None, None, None
+
+#     except Exception as e:
+#         raise e  # You can log or handle the exception as needed
+
+
 # Main function to fetch and process data
 def main():
     try:
@@ -364,6 +421,8 @@ def main():
         while is_market_open():
             start_fetch = time.time()
             nf_SP, bnf_SP = fetch_and_process_data(expiryDates)
+            store_strike_prices(nf_SP,bnf_SP)
+            # print(fetch_strike_prices())
             end_fetch = time.time()
             # Calculate the time taken during this iteration
             elapsed_time = end_fetch - start_fetch
@@ -392,18 +451,7 @@ def main():
 
 if __name__ == "__main__":
     # Start time for the script (9:00 AM) and end time (3:30 PM)
-    start_time = datetime.time(9, 0)
-    end_time = datetime.time(19, 40)
+    start_time = datetime.time(0, 0)
+    end_time = datetime.time(0, 10)
     main()
 
-
-# Function to store nf_SP and bnf_SP in the database
-def store_strike_prices(nf_SP, bnf_SP):
-    conn = sqlite3.connect('strike_prices.db')
-    cursor = conn.cursor()
-    
-    # Insert or update the nf_SP and bnf_SP values in the database
-    cursor.execute('INSERT OR REPLACE INTO strike_prices (id, nf_SP, bnf_SP) VALUES (1, ?, ?)', (nf_SP, bnf_SP))
-    
-    conn.commit()
-    conn.close()

@@ -32,7 +32,7 @@ Execute the following in order:
         - pip install -r requirements.txt
     Step 2 : Node modules in (frontend folder) -
         - npm install
-        - npm install axios react-plotly.js (Optional)
+        - npm install axios react-plotly.js
     Step 3 : You must have 2 terminals for this -
         To start Flask API run below command in /backend directory/:
             - python app.py 

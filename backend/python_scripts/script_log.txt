@@ -26,3 +26,260 @@
 2023-08-24 18:07:10 - INFO: Time elapsed to fetch and save Bank Nifty data = 2 seconds
 2023-08-24 18:07:10 - INFO: Total time elapsed = 3 seconds
 2023-08-24 18:07:10 - INFO: Sleep duration is set to = 56 seconds
+2023-08-24 22:46:10 - INFO: Fetching and processing data for ['24-Aug-2023', '31-Aug-2023', '28-Sep-2023']
+2023-08-24 22:46:10 - INFO: Fetching Nifty data...
+2023-08-24 22:46:11 - INFO: Time elapsed to fetch and save Nifty data = 0 seconds
+2023-08-24 22:46:11 - INFO: Fetching Bank Nifty data...
+2023-08-24 22:46:12 - INFO: Time elapsed to fetch and save Bank Nifty data = 1 seconds
+2023-08-24 22:46:12 - ERROR: An error occurred in the main function: name 'store_strike_prices' is not defined
+2023-08-24 22:46:12 - ERROR: Traceback (most recent call last):
+  File "c:\Users\kira1\Documents\Git_Repos\OC-Live-Data\backend\python_scripts\Fetch NSE OC data.py", line 367, in main
+    store_strike_prices(nf_SP,bnf_SP)
+NameError: name 'store_strike_prices' is not defined
+
+2023-08-24 22:46:57 - INFO: Fetching and processing data for ['24-Aug-2023', '31-Aug-2023', '28-Sep-2023']
+2023-08-24 22:46:57 - INFO: Fetching Nifty data...
+2023-08-24 22:46:59 - INFO: Time elapsed to fetch and save Nifty data = 1 seconds
+2023-08-24 22:46:59 - INFO: Fetching Bank Nifty data...
+2023-08-24 22:47:00 - INFO: Time elapsed to fetch and save Bank Nifty data = 0 seconds
+2023-08-24 22:47:00 - ERROR: An error occurred in the main function: name 'store_strike_prices' is not defined
+2023-08-24 22:47:00 - ERROR: Traceback (most recent call last):
+  File "c:\Users\kira1\Documents\Git_Repos\OC-Live-Data\backend\python_scripts\Fetch NSE OC data.py", line 367, in main
+    store_strike_prices(nf_SP,bnf_SP)
+NameError: name 'store_strike_prices' is not defined
+
+2023-08-24 22:49:05 - INFO: Fetching and processing data for ['24-Aug-2023', '31-Aug-2023', '28-Sep-2023']
+2023-08-24 22:49:05 - INFO: Fetching Nifty data...
+2023-08-24 22:49:06 - INFO: Time elapsed to fetch and save Nifty data = 1 seconds
+2023-08-24 22:49:06 - INFO: Fetching Bank Nifty data...
+2023-08-24 22:49:07 - INFO: Time elapsed to fetch and save Bank Nifty data = 0 seconds
+2023-08-24 22:49:07 - ERROR: An error occurred in the main function: name 'store_strike_prices' is not defined
+2023-08-24 22:49:07 - ERROR: Traceback (most recent call last):
+  File "c:\Users\kira1\Documents\Git_Repos\OC-Live-Data\backend\python_scripts\Fetch NSE OC data.py", line 368, in main
+    store_strike_prices(nf_SP,bnf_SP)
+NameError: name 'store_strike_prices' is not defined
+
+2023-08-24 22:52:07 - INFO: Fetching and processing data for ['24-Aug-2023', '31-Aug-2023', '28-Sep-2023']
+2023-08-24 22:52:07 - INFO: Fetching Nifty data...
+2023-08-24 22:52:09 - INFO: Time elapsed to fetch and save Nifty data = 1 seconds
+2023-08-24 22:52:09 - INFO: Fetching Bank Nifty data...
+2023-08-24 22:52:10 - INFO: Time elapsed to fetch and save Bank Nifty data = 1 seconds
+2023-08-24 22:52:10 - ERROR: An error occurred in the main function: no such table: strike_prices
+2023-08-24 22:52:10 - ERROR: Traceback (most recent call last):
+  File "c:\Users\kira1\Documents\Git_Repos\OC-Live-Data\backend\python_scripts\Fetch NSE OC data.py", line 381, in main
+    store_strike_prices(nf_SP,bnf_SP)
+  File "c:\Users\kira1\Documents\Git_Repos\OC-Live-Data\backend\python_scripts\Fetch NSE OC data.py", line 360, in store_strike_prices
+    cursor.execute('INSERT OR REPLACE INTO strike_prices (id, nf_SP, bnf_SP) VALUES (1, ?, ?)', (nf_SP, bnf_SP))
+sqlite3.OperationalError: no such table: strike_prices
+
+2023-08-24 22:55:13 - INFO: Fetching and processing data for ['24-Aug-2023', '31-Aug-2023', '28-Sep-2023']
+2023-08-24 22:55:13 - INFO: Fetching Nifty data...
+2023-08-24 22:55:14 - INFO: Time elapsed to fetch and save Nifty data = 1 seconds
+2023-08-24 22:55:14 - INFO: Fetching Bank Nifty data...
+2023-08-24 22:55:16 - INFO: Time elapsed to fetch and save Bank Nifty data = 1 seconds
+2023-08-24 22:55:16 - ERROR: An error occurred in the main function: no such table: strike_prices
+2023-08-24 22:55:16 - ERROR: Traceback (most recent call last):
+  File "c:\Users\kira1\Documents\Git_Repos\OC-Live-Data\backend\python_scripts\Fetch NSE OC data.py", line 381, in main
+    store_strike_prices(nf_SP,bnf_SP)
+  File "c:\Users\kira1\Documents\Git_Repos\OC-Live-Data\backend\python_scripts\Fetch NSE OC data.py", line 360, in store_strike_prices
+    cursor.execute('INSERT OR REPLACE INTO strike_prices (id, nf_SP, bnf_SP) VALUES (1, ?, ?)', (nf_SP, bnf_SP))
+sqlite3.OperationalError: no such table: strike_prices
+
+2023-08-24 23:12:17 - INFO: Fetching and processing data for ['24-Aug-2023', '31-Aug-2023', '28-Sep-2023']
+2023-08-24 23:12:17 - INFO: Fetching Nifty data...
+2023-08-24 23:12:18 - INFO: Time elapsed to fetch and save Nifty data = 1 seconds
+2023-08-24 23:12:18 - INFO: Fetching Bank Nifty data...
+2023-08-24 23:12:19 - INFO: Time elapsed to fetch and save Bank Nifty data = 0 seconds
+2023-08-24 23:12:19 - ERROR: An error occurred in the main function: no such table: strike_prices
+2023-08-24 23:12:19 - ERROR: Traceback (most recent call last):
+  File "c:\Users\kira1\Documents\Git_Repos\OC-Live-Data\backend\python_scripts\Fetch NSE OC data.py", line 380, in main
+    store_strike_prices(nf_SP,bnf_SP)
+  File "c:\Users\kira1\Documents\Git_Repos\OC-Live-Data\backend\python_scripts\Fetch NSE OC data.py", line 359, in store_strike_prices
+    cursor.execute('INSERT OR REPLACE INTO strike_prices (id, nf_SP, bnf_SP) VALUES (1, ?, ?)', (nf_SP, bnf_SP))
+sqlite3.OperationalError: no such table: strike_prices
+
+2023-08-24 23:16:43 - INFO: Fetching and processing data for ['24-Aug-2023', '31-Aug-2023', '28-Sep-2023']
+2023-08-24 23:16:43 - INFO: Fetching Nifty data...
+2023-08-24 23:16:44 - INFO: Time elapsed to fetch and save Nifty data = 1 seconds
+2023-08-24 23:16:44 - INFO: Fetching Bank Nifty data...
+2023-08-24 23:16:45 - INFO: Time elapsed to fetch and save Bank Nifty data = 0 seconds
+2023-08-24 23:16:45 - ERROR: An error occurred in the main function: Cannot operate on a closed database.
+2023-08-24 23:16:45 - ERROR: Traceback (most recent call last):
+  File "c:\Users\kira1\Documents\Git_Repos\OC-Live-Data\backend\python_scripts\Fetch NSE OC data.py", line 390, in main
+    store_strike_prices(nf_SP,bnf_SP)
+  File "c:\Users\kira1\Documents\Git_Repos\OC-Live-Data\backend\python_scripts\Fetch NSE OC data.py", line 369, in store_strike_prices
+    cursor.execute('INSERT OR REPLACE INTO strike_prices (id, nf_SP, bnf_SP) VALUES (1, ?, ?)', (nf_SP, bnf_SP))
+sqlite3.ProgrammingError: Cannot operate on a closed database.
+
+2023-08-24 23:17:17 - INFO: Fetching and processing data for ['24-Aug-2023', '31-Aug-2023', '28-Sep-2023']
+2023-08-24 23:17:17 - INFO: Fetching Nifty data...
+2023-08-24 23:17:19 - INFO: Time elapsed to fetch and save Nifty data = 1 seconds
+2023-08-24 23:17:19 - INFO: Fetching Bank Nifty data...
+2023-08-24 23:17:19 - INFO: Time elapsed to fetch and save Bank Nifty data = 0 seconds
+2023-08-24 23:17:19 - INFO: Total time elapsed = 2 seconds
+2023-08-24 23:17:19 - INFO: Sleep duration is set to = 57 seconds
+2023-08-24 23:20:52 - INFO: Fetching and processing data for ['24-Aug-2023', '31-Aug-2023', '28-Sep-2023']
+2023-08-24 23:20:52 - INFO: Fetching Nifty data...
+2023-08-24 23:20:53 - INFO: Created 'Saved data' folder.
+2023-08-24 23:20:53 - INFO: Time elapsed to fetch and save Nifty data = 1 seconds
+2023-08-24 23:20:53 - INFO: Fetching Bank Nifty data...
+2023-08-24 23:20:54 - INFO: Time elapsed to fetch and save Bank Nifty data = 0 seconds
+2023-08-24 23:20:54 - INFO: Total time elapsed = 2 seconds
+2023-08-24 23:20:54 - INFO: Sleep duration is set to = 57 seconds
+2023-08-24 23:39:27 - INFO: Fetching and processing data for ['24-Aug-2023', '31-Aug-2023', '28-Sep-2023']
+2023-08-24 23:39:27 - INFO: Fetching Nifty data...
+2023-08-24 23:39:28 - INFO: Time elapsed to fetch and save Nifty data = 1 seconds
+2023-08-24 23:39:28 - INFO: Fetching Bank Nifty data...
+2023-08-24 23:39:29 - INFO: Time elapsed to fetch and save Bank Nifty data = 0 seconds
+2023-08-24 23:39:29 - INFO: Total time elapsed = 1 seconds
+2023-08-24 23:39:29 - INFO: Sleep duration is set to = 58 seconds
+2023-08-24 23:40:27 - INFO: Fetching and processing data for ['24-Aug-2023', '31-Aug-2023', '28-Sep-2023']
+2023-08-24 23:40:27 - INFO: Fetching Nifty data...
+2023-08-24 23:40:28 - INFO: Time elapsed to fetch and save Nifty data = 0 seconds
+2023-08-24 23:40:28 - INFO: Fetching Bank Nifty data...
+2023-08-24 23:40:29 - INFO: Time elapsed to fetch and save Bank Nifty data = 0 seconds
+2023-08-24 23:40:29 - INFO: Total time elapsed = 1 seconds
+2023-08-24 23:40:29 - INFO: Sleep duration is set to = 58 seconds
+2023-08-24 23:42:44 - INFO: Fetching and processing data for ['24-Aug-2023', '31-Aug-2023', '28-Sep-2023']
+2023-08-24 23:42:44 - INFO: Fetching Nifty data...
+2023-08-24 23:42:45 - INFO: Time elapsed to fetch and save Nifty data = 1 seconds
+2023-08-24 23:42:45 - INFO: Fetching Bank Nifty data...
+2023-08-24 23:42:46 - INFO: Time elapsed to fetch and save Bank Nifty data = 0 seconds
+2023-08-24 23:42:46 - INFO: Total time elapsed = 1 seconds
+2023-08-24 23:42:46 - INFO: Sleep duration is set to = 58 seconds
+2023-08-24 23:43:44 - INFO: Fetching and processing data for ['24-Aug-2023', '31-Aug-2023', '28-Sep-2023']
+2023-08-24 23:43:44 - INFO: Fetching Nifty data...
+2023-08-24 23:43:45 - INFO: Time elapsed to fetch and save Nifty data = 0 seconds
+2023-08-24 23:43:45 - INFO: Fetching Bank Nifty data...
+2023-08-24 23:43:46 - INFO: Time elapsed to fetch and save Bank Nifty data = 0 seconds
+2023-08-24 23:43:46 - INFO: Total time elapsed = 1 seconds
+2023-08-24 23:43:46 - INFO: Sleep duration is set to = 58 seconds
+2023-08-24 23:44:44 - INFO: Fetching and processing data for ['24-Aug-2023', '31-Aug-2023', '28-Sep-2023']
+2023-08-24 23:44:44 - INFO: Fetching Nifty data...
+2023-08-24 23:44:45 - INFO: Time elapsed to fetch and save Nifty data = 1 seconds
+2023-08-24 23:44:45 - INFO: Fetching Bank Nifty data...
+2023-08-24 23:44:46 - INFO: Time elapsed to fetch and save Bank Nifty data = 0 seconds
+2023-08-24 23:44:46 - INFO: Total time elapsed = 1 seconds
+2023-08-24 23:44:46 - INFO: Sleep duration is set to = 58 seconds
+2023-08-24 23:45:42 - INFO: Fetching and processing data for ['24-Aug-2023', '31-Aug-2023', '28-Sep-2023']
+2023-08-24 23:45:42 - INFO: Fetching Nifty data...
+2023-08-24 23:45:43 - INFO: Time elapsed to fetch and save Nifty data = 1 seconds
+2023-08-24 23:45:43 - INFO: Fetching Bank Nifty data...
+2023-08-24 23:45:44 - INFO: Time elapsed to fetch and save Bank Nifty data = 0 seconds
+2023-08-24 23:45:44 - INFO: Total time elapsed = 2 seconds
+2023-08-24 23:45:44 - INFO: Sleep duration is set to = 57 seconds
+2023-08-24 23:46:42 - INFO: Fetching and processing data for ['24-Aug-2023', '31-Aug-2023', '28-Sep-2023']
+2023-08-24 23:46:42 - INFO: Fetching Nifty data...
+2023-08-24 23:46:43 - INFO: Time elapsed to fetch and save Nifty data = 0 seconds
+2023-08-24 23:46:43 - INFO: Fetching Bank Nifty data...
+2023-08-24 23:46:44 - INFO: Time elapsed to fetch and save Bank Nifty data = 1 seconds
+2023-08-24 23:46:44 - INFO: Total time elapsed = 2 seconds
+2023-08-24 23:46:44 - INFO: Sleep duration is set to = 57 seconds
+2023-08-24 23:52:28 - INFO: Fetching and processing data for ['24-Aug-2023', '31-Aug-2023', '28-Sep-2023']
+2023-08-24 23:52:28 - INFO: Fetching Nifty data...
+2023-08-24 23:52:30 - INFO: Time elapsed to fetch and save Nifty data = 1 seconds
+2023-08-24 23:52:30 - INFO: Fetching Bank Nifty data...
+2023-08-24 23:52:30 - INFO: Time elapsed to fetch and save Bank Nifty data = 0 seconds
+2023-08-24 23:52:30 - ERROR: An error occurred in the main function: table strike_prices has no column named dateTime
+2023-08-24 23:52:30 - ERROR: Traceback (most recent call last):
+  File "c:\Users\kira1\Documents\Git_Repos\OC-Live-Data\backend\python_scripts\Fetch NSE OC data.py", line 435, in main
+    store_strike_prices(nf_SP,bnf_SP)
+  File "c:\Users\kira1\Documents\Git_Repos\OC-Live-Data\backend\python_scripts\Fetch NSE OC data.py", line 381, in store_strike_prices
+    cursor.execute("INSERT INTO strike_prices (dateTime, nf_SP, bnf_SP) VALUES (datetime('now'), ?, ?)", (nf_SP, bnf_SP))
+sqlite3.OperationalError: table strike_prices has no column named dateTime
+
+2023-08-24 23:53:08 - INFO: Fetching and processing data for ['24-Aug-2023', '31-Aug-2023', '28-Sep-2023']
+2023-08-24 23:53:08 - INFO: Fetching Nifty data...
+2023-08-24 23:53:10 - INFO: Time elapsed to fetch and save Nifty data = 1 seconds
+2023-08-24 23:53:10 - INFO: Fetching Bank Nifty data...
+2023-08-24 23:53:10 - INFO: Time elapsed to fetch and save Bank Nifty data = 0 seconds
+2023-08-24 23:53:10 - INFO: Total time elapsed = 2 seconds
+2023-08-24 23:53:10 - INFO: Sleep duration is set to = 57 seconds
+2023-08-24 23:54:08 - INFO: Fetching and processing data for ['24-Aug-2023', '31-Aug-2023', '28-Sep-2023']
+2023-08-24 23:54:08 - INFO: Fetching Nifty data...
+2023-08-24 23:54:09 - INFO: Time elapsed to fetch and save Nifty data = 1 seconds
+2023-08-24 23:54:09 - INFO: Fetching Bank Nifty data...
+2023-08-24 23:54:11 - INFO: Time elapsed to fetch and save Bank Nifty data = 1 seconds
+2023-08-24 23:54:11 - INFO: Total time elapsed = 2 seconds
+2023-08-24 23:54:11 - INFO: Sleep duration is set to = 57 seconds
+2023-08-24 23:54:30 - INFO: Fetching and processing data for ['24-Aug-2023', '31-Aug-2023', '28-Sep-2023']
+2023-08-24 23:54:30 - INFO: Fetching Nifty data...
+2023-08-24 23:54:31 - INFO: Time elapsed to fetch and save Nifty data = 1 seconds
+2023-08-24 23:54:31 - INFO: Fetching Bank Nifty data...
+2023-08-24 23:54:32 - INFO: Time elapsed to fetch and save Bank Nifty data = 0 seconds
+2023-08-24 23:54:32 - INFO: Total time elapsed = 1 seconds
+2023-08-24 23:54:32 - INFO: Sleep duration is set to = 58 seconds
+2023-08-24 23:55:30 - INFO: Fetching and processing data for ['24-Aug-2023', '31-Aug-2023', '28-Sep-2023']
+2023-08-24 23:55:30 - INFO: Fetching Nifty data...
+2023-08-24 23:55:31 - INFO: Time elapsed to fetch and save Nifty data = 0 seconds
+2023-08-24 23:55:31 - INFO: Fetching Bank Nifty data...
+2023-08-24 23:55:32 - INFO: Time elapsed to fetch and save Bank Nifty data = 1 seconds
+2023-08-24 23:55:32 - INFO: Total time elapsed = 1 seconds
+2023-08-24 23:55:32 - INFO: Sleep duration is set to = 58 seconds
+2023-08-24 23:56:23 - INFO: Fetching and processing data for ['24-Aug-2023', '31-Aug-2023', '28-Sep-2023']
+2023-08-24 23:56:23 - INFO: Fetching Nifty data...
+2023-08-24 23:56:24 - INFO: Time elapsed to fetch and save Nifty data = 1 seconds
+2023-08-24 23:56:24 - INFO: Fetching Bank Nifty data...
+2023-08-24 23:56:26 - INFO: Time elapsed to fetch and save Bank Nifty data = 1 seconds
+2023-08-24 23:56:26 - ERROR: An error occurred in the main function: near "1": syntax error
+2023-08-24 23:56:26 - ERROR: Traceback (most recent call last):
+  File "c:\Users\kira1\Documents\Git_Repos\OC-Live-Data\backend\python_scripts\Fetch NSE OC data.py", line 436, in main
+    print(fetch_strike_prices())
+  File "c:\Users\kira1\Documents\Git_Repos\OC-Live-Data\backend\python_scripts\Fetch NSE OC data.py", line 417, in fetch_strike_prices
+    raise e  # You can log or handle the exception as needed
+  File "c:\Users\kira1\Documents\Git_Repos\OC-Live-Data\backend\python_scripts\Fetch NSE OC data.py", line 405, in fetch_strike_prices
+    cursor.execute('SELECT TOP 1 nf_SP, bnf_SP FROM strike_prices ORDER BY dateTime DESC')
+sqlite3.OperationalError: near "1": syntax error
+
+2023-08-24 23:57:57 - INFO: Fetching and processing data for ['24-Aug-2023', '31-Aug-2023', '28-Sep-2023']
+2023-08-24 23:57:57 - INFO: Fetching Nifty data...
+2023-08-24 23:57:59 - INFO: Time elapsed to fetch and save Nifty data = 1 seconds
+2023-08-24 23:57:59 - INFO: Fetching Bank Nifty data...
+2023-08-24 23:57:59 - INFO: Time elapsed to fetch and save Bank Nifty data = 0 seconds
+2023-08-24 23:57:59 - ERROR: An error occurred in the main function: near "ORDER": syntax error
+2023-08-24 23:57:59 - ERROR: Traceback (most recent call last):
+  File "c:\Users\kira1\Documents\Git_Repos\OC-Live-Data\backend\python_scripts\Fetch NSE OC data.py", line 436, in main
+    print(fetch_strike_prices())
+  File "c:\Users\kira1\Documents\Git_Repos\OC-Live-Data\backend\python_scripts\Fetch NSE OC data.py", line 417, in fetch_strike_prices
+    raise e  # You can log or handle the exception as needed
+  File "c:\Users\kira1\Documents\Git_Repos\OC-Live-Data\backend\python_scripts\Fetch NSE OC data.py", line 405, in fetch_strike_prices
+    cursor.execute('SELECT nf_SP, bnf_SP FROM strike_prices LIMIT 1 ORDER BY dateTime DESC')
+sqlite3.OperationalError: near "ORDER": syntax error
+
+2023-08-24 23:58:52 - INFO: Fetching and processing data for ['24-Aug-2023', '31-Aug-2023', '28-Sep-2023']
+2023-08-24 23:58:52 - INFO: Fetching Nifty data...
+2023-08-24 23:58:53 - INFO: Time elapsed to fetch and save Nifty data = 1 seconds
+2023-08-24 23:58:53 - INFO: Fetching Bank Nifty data...
+2023-08-24 23:58:54 - INFO: Time elapsed to fetch and save Bank Nifty data = 0 seconds
+2023-08-24 23:58:54 - INFO: Total time elapsed = 1 seconds
+2023-08-24 23:58:54 - INFO: Sleep duration is set to = 58 seconds
+2023-08-25 00:00:58 - INFO: Fetching and processing data for ['31-Aug-2023', '07-Sep-2023', '28-Sep-2023']
+2023-08-25 00:00:58 - INFO: Fetching Nifty data...
+2023-08-25 00:00:59 - INFO: Created 'Saved data' folder.
+2023-08-25 00:00:59 - INFO: Time elapsed to fetch and save Nifty data = 1 seconds
+2023-08-25 00:00:59 - INFO: Fetching Bank Nifty data...
+2023-08-25 00:01:00 - INFO: Time elapsed to fetch and save Bank Nifty data = 0 seconds
+2023-08-25 00:01:00 - ERROR: An error occurred in the main function: too many values to unpack (expected 2)
+2023-08-25 00:01:00 - ERROR: Traceback (most recent call last):
+  File "c:\Users\kira1\Documents\Git_Repos\OC-Live-Data\backend\python_scripts\Fetch NSE OC data.py", line 436, in main
+    print(fetch_strike_prices())
+  File "c:\Users\kira1\Documents\Git_Repos\OC-Live-Data\backend\python_scripts\Fetch NSE OC data.py", line 417, in fetch_strike_prices
+    raise e  # You can log or handle the exception as needed
+  File "c:\Users\kira1\Documents\Git_Repos\OC-Live-Data\backend\python_scripts\Fetch NSE OC data.py", line 411, in fetch_strike_prices
+    nf_SP, bnf_SP = result
+ValueError: too many values to unpack (expected 2)
+
+2023-08-25 00:01:53 - INFO: Fetching and processing data for ['31-Aug-2023', '07-Sep-2023', '28-Sep-2023']
+2023-08-25 00:01:53 - INFO: Fetching Nifty data...
+2023-08-25 00:01:54 - INFO: Time elapsed to fetch and save Nifty data = 0 seconds
+2023-08-25 00:01:54 - INFO: Fetching Bank Nifty data...
+2023-08-25 00:01:54 - INFO: Time elapsed to fetch and save Bank Nifty data = 0 seconds
+2023-08-25 00:01:54 - INFO: Total time elapsed = 1 seconds
+2023-08-25 00:01:54 - INFO: Sleep duration is set to = 58 seconds
+2023-08-25 00:02:53 - INFO: Fetching and processing data for ['31-Aug-2023', '07-Sep-2023', '28-Sep-2023']
+2023-08-25 00:02:53 - INFO: Fetching Nifty data...
+2023-08-25 00:02:54 - INFO: Time elapsed to fetch and save Nifty data = 0 seconds
+2023-08-25 00:02:54 - INFO: Fetching Bank Nifty data...
+2023-08-25 00:02:54 - INFO: Time elapsed to fetch and save Bank Nifty data = 0 seconds
+2023-08-25 00:02:54 - INFO: Total time elapsed = 1 seconds
+2023-08-25 00:02:54 - INFO: Sleep duration is set to = 58 seconds
