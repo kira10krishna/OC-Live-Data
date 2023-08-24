@@ -23,3 +23,13 @@ Feel free to comment on the code
 
 Manual code entries needed to be changed: (for self)
 - File name from which chart data is fetched
+
+
+
+Execute the following in order:
+    {Creating virtual environment} : -
+        - python -m venv venv in root folder (OC-LIVE-DATA folder)
+        - Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+        - venv\Scripts\activate
+
+    
