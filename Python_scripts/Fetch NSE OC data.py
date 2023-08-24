@@ -148,7 +148,7 @@ def loadDataframes(num,step,nearest,expDate,url):
 def fetchData(num, step, stockIndex, indexUrl, expDate):
     nearest = set_header(stockIndex)
     df_list = loadDataframes(num, step, nearest, expDate, indexUrl)
-    return df_list
+    return nearest, df_list
 
 
 # Finding highest Open Interest of People's in CE based on CE data         
@@ -247,7 +247,7 @@ def fetch_and_process_data(exp_date):
     # Nifty data
     logging.info("Fetching Nifty data...")
     start_fetch = time.time()
-    df_nifty_list = fetchData(number, step["nf"], stock["nf"], urls["url_nf"], exp_date)
+    nifty_nearest, df_nifty_list = fetchData(number, step["nf"], stock["nf"], urls["url_nf"], exp_date)
 
     # Export data to Excel for Nifty
     for i, df_nifty in enumerate(df_nifty_list):
@@ -263,7 +263,7 @@ def fetch_and_process_data(exp_date):
     # Bank Nifty data
     logging.info("Fetching Bank Nifty data...")
     start_fetch = time.time()
-    df_bank_nifty_list = fetchData(number, step["bnf"], stock["bnf"], urls["url_bnf"], exp_date)
+    bank_nifty_nearest, df_bank_nifty_list = fetchData(number, step["bnf"], stock["bnf"], urls["url_bnf"], exp_date)
 
     # Export data to Excel for Bank Nifty
     for i, df_bank_nifty in enumerate(df_bank_nifty_list):
@@ -274,6 +274,8 @@ def fetch_and_process_data(exp_date):
     elapsed_time = end_fetch - start_fetch
     print("Time elapsed to fetch and save Bank Nifty data =", int(elapsed_time), "seconds")
     logging.info("Time elapsed to fetch and save Bank Nifty data = %s seconds", str(int(elapsed_time)))
+
+    return nifty_nearest, bank_nifty_nearest
     
     # Finding Highest OI in Call Option In Nifty
     # nf_highestoi_CE = highest_oi_CE(10, 50, nearest, urls["url_nf"])
@@ -359,7 +361,7 @@ def main():
         # Looping each minute to collect data with variable sleep timer
         while is_market_open():
             start_fetch = time.time()
-            fetch_and_process_data(expiryDates)
+            nf_SP, bnf_SP = fetch_and_process_data(expiryDates)
             end_fetch = time.time()
             # Calculate the time taken during this iteration
             elapsed_time = end_fetch - start_fetch
