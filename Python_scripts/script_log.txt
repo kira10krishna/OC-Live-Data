@@ -1,0 +1,21 @@
+2023-08-24 15:22:24 - INFO: Fetching and processing data for ['24-Aug-2023', '31-Aug-2023', '28-Sep-2023']
+2023-08-24 15:22:24 - INFO: Fetching Nifty data...
+2023-08-24 15:22:25 - INFO: Time elapsed to fetch and save Nifty data = 1 seconds
+2023-08-24 15:22:25 - INFO: Fetching Bank Nifty data...
+2023-08-24 15:22:26 - INFO: Time elapsed to fetch and save Bank Nifty data = 0 seconds
+2023-08-24 15:22:26 - INFO: Total time elapsed = 2 seconds
+2023-08-24 15:22:26 - INFO: Sleep duration is set to = 57 seconds
+2023-08-24 15:23:24 - INFO: Fetching and processing data for ['24-Aug-2023', '31-Aug-2023', '28-Sep-2023']
+2023-08-24 15:23:24 - INFO: Fetching Nifty data...
+2023-08-24 15:23:25 - INFO: Time elapsed to fetch and save Nifty data = 1 seconds
+2023-08-24 15:23:25 - INFO: Fetching Bank Nifty data...
+2023-08-24 15:23:26 - INFO: Time elapsed to fetch and save Bank Nifty data = 0 seconds
+2023-08-24 15:23:26 - INFO: Total time elapsed = 1 seconds
+2023-08-24 15:23:26 - INFO: Sleep duration is set to = 58 seconds
+2023-08-24 15:24:24 - INFO: Fetching and processing data for ['24-Aug-2023', '31-Aug-2023', '28-Sep-2023']
+2023-08-24 15:24:24 - INFO: Fetching Nifty data...
+2023-08-24 15:24:25 - INFO: Time elapsed to fetch and save Nifty data = 0 seconds
+2023-08-24 15:24:25 - INFO: Fetching Bank Nifty data...
+2023-08-24 15:24:26 - INFO: Time elapsed to fetch and save Bank Nifty data = 1 seconds
+2023-08-24 15:24:26 - INFO: Total time elapsed = 2 seconds
+2023-08-24 15:24:26 - INFO: Sleep duration is set to = 57 seconds

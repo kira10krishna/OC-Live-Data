@@ -11,7 +11,7 @@ CORS(app)
 folder_path = os.path.join("data", f"Data for {(datetime.date.today()).strftime('%d-%b-%Y')}")
 # data_file_path = 'data/chart_data.xlsx'
 # data_file_path = os.path.join(folder_path, f"{filename}_{expiry_date}.xlsx")
-data_file_path = os.path.join(folder_path, "Nifty_Data_24-Jul-2023.xlsx")
+data_file_path = os.path.join(folder_path, "Nifty_Data_24-Aug-2023.xlsx")
 
 
 # Load data from Excel file

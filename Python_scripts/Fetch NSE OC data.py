@@ -37,7 +37,7 @@ headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/
 
 
 # Set up the logging
-log_file_path = os.path.join("C:\\Users\\kira1\\Documents\\Python Scripts", "script_log.txt")
+log_file_path = os.path.join("python_Scripts", "script_log.txt")
 logging.basicConfig(
     filename=log_file_path,
     level=logging.INFO,
