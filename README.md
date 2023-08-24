@@ -21,15 +21,28 @@ Just run the program and enjoy.
 
 Feel free to comment on the code
 
-Manual code entries needed to be changed: (for self)
-- File name from which chart data is fetched
-
 
 
 Execute the following in order:
-    {Creating virtual environment} : -
-        - python -m venv venv in root folder (OC-LIVE-DATA folder)
+    Step 1 : Creating virtual environment in root folder (OC-LIVE-DATA folder) -
+        - python -m venv venv
         - Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
         - venv\Scripts\activate
+        - cd backend\python_scripts
+        - pip install -r requirements.txt
+    Step 2 : Node modules in (frontend folder) -
+        - npm install
+        - npm install axios react-plotly.js (Optional)
+    Step 3 : You must have 2 terminals for this -
+        To start Flask API run below command in /backend directory/:
+            - python app.py 
+        To start react dev server run below command in /frontend directory/:
+            - npm start
+    
+
+Note to self -
+- File name is static in app.py
+- Add logging for api requests
+    
 
     

@@ -13,6 +13,8 @@ import plotly.graph_objs as go
 from plotly.subplots import make_subplots
 import ipywidgets as widgets
 from IPython.display import display
+import sqlite3
+
 #import tkinter as tk
 #from tkinter import messagebox
 
@@ -394,3 +396,14 @@ if __name__ == "__main__":
     end_time = datetime.time(19, 40)
     main()
 
+
+# Function to store nf_SP and bnf_SP in the database
+def store_strike_prices(nf_SP, bnf_SP):
+    conn = sqlite3.connect('strike_prices.db')
+    cursor = conn.cursor()
+    
+    # Insert or update the nf_SP and bnf_SP values in the database
+    cursor.execute('INSERT OR REPLACE INTO strike_prices (id, nf_SP, bnf_SP) VALUES (1, ?, ?)', (nf_SP, bnf_SP))
+    
+    conn.commit()
+    conn.close()
