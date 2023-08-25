@@ -5,6 +5,7 @@ import datetime
 import requests
 import os
 import sys
+import threading
 #import logging
 
 
@@ -29,19 +30,27 @@ def index():
     return "Helleo, I am flask API, up and running."
 
 
-# @app.route('/run-main-code', methods=['POST'])
-# def run_main_code():
-#     # Call the function or code you want to execute in your main file
-#     Fetch_NSE_OC_data.main()
-#     return "Main code executed successfully"
+# main function
+def main_function():
+    # Call the function or code you want to execute in your main file
+    Fetch_NSE_OC_data.main()
+    print("Main function executed")
 
-@app.route('/run-main-code', methods=['POST'])
+
+@app.route('/run-main-code', methods=['GET','POST'])
 def run_main_code():
-    if request.method == 'POST':
+    # Run the main function in a separate thread
+    thread = threading.Thread(target=main_function)
+    thread.start()
+    if request.method == 'GET':
         # Your code to execute the main logic for a POST request
-        return "Main code executed successfully"
+        return "Main code executed inside GET successfully"
+    if request.method == 'POST':
+        return "Main code executed inside POST successfully"
     else:
-        return "Method other than POST not allowed for this endpoint"
+        return "Main code executed outside of POST and GET successfully"
+    # else:
+    #     return "Method other than POST not allowed for this endpoint"
 
 
 # Read Excel data and convert to JSON
@@ -90,4 +99,4 @@ def get_strike_price():
 
 
 if __name__ == '__main__':
-    app.run(host="127.0.0.1", port=8989)
+    app.run(host="127.0.0.1", port=8989, debug=True)

@@ -47,8 +47,11 @@ Note to self -
 
 Current actions:-
 - Build a modular code for python and API
-    - Log file config
-
+    - Exporting data to excel
+    - Loading data in dataframes
+    - Fetch data functions
+    - finally main function
+    - Check for all logging exceptions, place it wherever necessary
 Next steps:-
 - Learn get method and also other methods of API
 - Connect API by frontend, i.e., Fetch APIs at frontend (Frontend and API talking to each other)

@@ -180,34 +180,43 @@ def export_to_excel(df, filename, expiry_date):
 
 
 # Method to perform check and wait until market opens
-def wait_until_market_open():
+def wait_until_market_open(start_time):
     current_time = datetime.datetime.now().time()
     while current_time < start_time:
         current_time = datetime.datetime.now().time()
         time.sleep(1)
 
-def is_market_open():
+def is_market_open(start_time, end_time):
     # Check if the current time is between the start time (9:00 AM) and the end time (3:30 PM)
     current_time = datetime.datetime.now().time()
     return start_time <= current_time <= end_time
 
-
-# # Define the URL of your Flask API
-api_url = 'http://127.0.0.1:8989/run-main-code'  # Update with your actual API URL
+# def post_response():
+#     # Define the URL of your Flask API
+#     api_url = 'http://127.0.0.1:8989/run-main-code'  # Update with your actual API URL
+#     # Rest API Post Method
+#     response = requests.post(api_url)
+#     # Check the response from the API
+#     if response.status_code == 200:
+#         print("Main code executed successfully. This message is coming from python file.")
+#     else:
+#         print("Failed to execute main code. Status code:", response.status_code)
 
 
 # Main function to fetch and process data
 def main():
+
     try:
+        start_time = datetime.time(9, 0)
+        end_time = datetime.time(23, 55)
         # Wait until the market opens
-        wait_until_market_open()
-        
-        
+        wait_until_market_open(start_time)
+             
         # Processing expiry dates
         expiryDates = expiryDateCalcs.expiry_dates()
 
         # Looping each minute to collect data with variable sleep timer
-        while is_market_open():
+        while is_market_open(start_time, end_time):
             start_fetch = time.time()
             nf_SP, bnf_SP = fetch_and_process_data(expiryDates)
             DBoperations.store_strike_prices(nf_SP,bnf_SP)
@@ -222,11 +231,15 @@ def main():
             sleep_duration = 60 - elapsed_time
             print("Sleep duration is set to =", int(sleep_duration), "seconds\n\n")
             logging.info("Sleep duration is set to = %s seconds", str(int(sleep_duration)))
+            
+            
 
             # Wait until the next minute to start the next iteration
             if 0 < sleep_duration < 60:
                 time.sleep(sleep_duration)
-                
+            # post_response()
+
+                    
         # Display the program closed alert
         # show_alert("Program Status", "The program has been closed.")
 
@@ -237,17 +250,10 @@ def main():
         # Log any exceptions that occur during the execution of the script
         logging.error("An error occurred in the main function: %s", e)
         logging.error(traceback.format_exc())      # traceback.print_exc()
+    
+
 
 if __name__ == "__main__":
     # Start time for the script (9:00 AM) and end time (3:30 PM)
-    start_time = datetime.time(9, 0)
-    end_time = datetime.time(20, 0)
     # Send a POST request to trigger the execution of main code
-    response = requests.post(api_url)
-
-    # Check the response from the API
-    if response.status_code == 200:
-        print("Main code executed successfully. This message contains in python file.")
-    else:
-        print("Failed to execute main code. Status code:", response.status_code)
     main()
