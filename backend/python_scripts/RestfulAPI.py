@@ -4,22 +4,44 @@ import pandas as pd
 import datetime
 import requests
 import os
-import logging
+import sys
+#import logging
+
+
+ab_path = os.path.abspath(os.path.join(os.path.dirname(__file__),'../python_scripts'))
+sys.path.append(ab_path)
+
 
 # Defined Libraries
-from . import paths_logging
-from . import DBoperations
+from python_scripts import paths_logging
+from python_scripts import DBoperations
+from python_scripts import Fetch_NSE_OC_data
 
 app = Flask(__name__)
 
 
 # Configure logging to print to the console
-logging.basicConfig(level=logging.DEBUG)
+#logging.basicConfig(level=logging.DEBUG)
 
 # Define a route for the root URL ("/")
 @app.route('/')
 def index():
-    return "Helleo, I am flask API, up  and running."
+    return "Helleo, I am flask API, up and running."
+
+
+# @app.route('/run-main-code', methods=['POST'])
+# def run_main_code():
+#     # Call the function or code you want to execute in your main file
+#     Fetch_NSE_OC_data.main()
+#     return "Main code executed successfully"
+
+@app.route('/run-main-code', methods=['POST'])
+def run_main_code():
+    if request.method == 'POST':
+        # Your code to execute the main logic for a POST request
+        return "Main code executed successfully"
+    else:
+        return "Method other than POST not allowed for this endpoint"
 
 
 # Read Excel data and convert to JSON
@@ -34,9 +56,9 @@ df_json = df.to_json(orient="split")
 def get_df_data():
     return jsonify({'df': df_json})
 
-@app.route('/api/getChartData')
+@app.route('/api/getChartData', methods=['GET'])
 def get_chart_data():
-    r = requests.get('http://127.0.0.1:5000/api/strikePrice')
+    r = requests.get('http://127.0.0.1:8989/api/strikePrice')
     json_SP = r.json()
     strike_price = json_SP["nf_SP"]
     df_filtered = df[df['strikePrice'] == strike_price]
@@ -68,4 +90,4 @@ def get_strike_price():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="127.0.0.1", port=8989)

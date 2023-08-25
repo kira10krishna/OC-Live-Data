@@ -1,4 +1,9 @@
 import requests
+import os,sys
+
+ab_path = os.path.abspath(os.path.join(os.path.dirname(__file__),'../python_scripts'))
+sys.path.append(ab_path)
+
 import paths_logging
 import logging
 import initializeVariables

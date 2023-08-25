@@ -1,6 +1,10 @@
 # Pre-defined Libraries
 import math
 import json
+import os, sys
+
+ab_path = os.path.abspath(os.path.join(os.path.dirname(__file__),'../python_scripts'))
+sys.path.append(ab_path)
 
 # Defined Libraries
 import initializeVariables

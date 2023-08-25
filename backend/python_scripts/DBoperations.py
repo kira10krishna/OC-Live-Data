@@ -1,8 +1,12 @@
 # Pre-defined Libraries
+import os, sys
 import sqlite3
 
+ab_path = os.path.abspath(os.path.join(os.path.dirname(__file__),'../python_scripts'))
+sys.path.append(ab_path)
+
 # Defined Libraries
-from . import paths_logging
+import paths_logging
 
 
 file_path = paths_logging.create_db_folder_path()
