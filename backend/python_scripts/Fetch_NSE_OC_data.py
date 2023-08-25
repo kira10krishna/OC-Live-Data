@@ -75,12 +75,11 @@ class MainApplication:
                 sleep_duration = 60 - elapsed_time
                 print("Sleep duration is set to =", int(sleep_duration), "seconds\n\n")
                 logging.info("Sleep duration is set to = %s seconds", str(int(sleep_duration)))
-                
-                
 
                 # Wait until the next minute to start the next iteration
                 if 0 < sleep_duration < 60:
                     time.sleep(sleep_duration)
+
         except requests.exceptions.RequestException as e:
             logging.error("Request error: %s", e)
         except Exception as e:
@@ -95,7 +94,7 @@ if __name__ == "__main__":
 
 # def post_response():
 #     # Define the URL of your Flask API
-#     api_url = 'http://127.0.0.1:8989/run-main-code'  # Update with your actual API URL
+#     api_url = 'http://127.0.0.1:5000/run-main-code'  # Update with your actual API URL
 #     # Rest API Post Method
 #     response = requests.post(api_url)
 #     # Check the response from the API 

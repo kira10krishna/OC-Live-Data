@@ -41,14 +41,12 @@ Execute the following in order:
     
 
 Note to self -
-- File name is static in app.py
 - Add logging for api requests
-- Build main python file in modular format
 
 
 Current actions:-
 - Learn get method and also other methods of API (again)
-- Bugfix for static data fetching APIs :- 
+- Bugfix for static data fetching APIs (which gives error if hard coded excel file not found) These 2 are commented for now:- 
         - /api/dfData
         - /api/getChartData
     => (Solution - Create an API endpoint to get exported excel files in each iteration)
