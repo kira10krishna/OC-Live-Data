@@ -1,7 +1,6 @@
 # Pre-defined Libraries
 import requests
 import json
-import math
 import pandas as pd
 import datetime
 import time
@@ -23,6 +22,7 @@ import initializeVariables
 import sessionMethods
 import marketDataCalcs
 import expiryDateCalcs
+import DBoperations
 
 
 # Initialize Variables
@@ -190,29 +190,6 @@ def is_market_open():
     return start_time <= current_time <= end_time
 
 
-# Function to store nf_SP and bnf_SP in the database
-def store_strike_prices(nf_SP, bnf_SP):
-    file_path = paths_logging.create_db_folder_path()
-    conn = sqlite3.connect(file_path)
-    cursor = conn.cursor()
-    # Create a table to store nf_SP and bnf_SP
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS strike_prices (
-            id INTEGER PRIMARY KEY,
-            dateTime DATETIME,
-            nf_SP REAL,
-            bnf_SP REAL
-        )
-    ''')
-    conn.commit()
-    
-    # Insert or update the nf_SP and bnf_SP values in the database
-    cursor.execute("INSERT INTO strike_prices (dateTime, nf_SP, bnf_SP) VALUES (datetime('now', 'localtime'), ?, ?)", (nf_SP, bnf_SP))
-    
-    conn.commit()
-    conn.close()
-
-
 # Main function to fetch and process data
 def main():
     try:
@@ -222,13 +199,11 @@ def main():
         # Processing expiry dates
         expiryDates = expiryDateCalcs.expiry_dates()
 
-
-
         # Looping each minute to collect data with variable sleep timer
         while is_market_open():
             start_fetch = time.time()
             nf_SP, bnf_SP = fetch_and_process_data(expiryDates)
-            store_strike_prices(nf_SP,bnf_SP)
+            DBoperations.store_strike_prices(nf_SP,bnf_SP)
             # print(fetch_strike_prices())
             end_fetch = time.time()
             # Calculate the time taken during this iteration
@@ -259,6 +234,5 @@ def main():
 if __name__ == "__main__":
     # Start time for the script (9:00 AM) and end time (3:30 PM)
     start_time = datetime.time(9, 0)
-    end_time = datetime.time(11, 45)
+    end_time = datetime.time(13, 0)
     main()
-
