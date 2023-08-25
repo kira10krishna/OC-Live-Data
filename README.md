@@ -46,14 +46,11 @@ Note to self -
 - Build main python file in modular format
 
 Current actions:-
-- API building : (All api's are mostly built)
-- Build a modular code for API
-    - Creating paths.py
-    - 
-- Adjust app.py and flaskAPI.py to work in sync and is mainly app.py
-- Learn get method and also other methods of API
+- Build a modular code for python and API
+    - Log file config
 
 Next steps:-
+- Learn get method and also other methods of API
 - Connect API by frontend, i.e., Fetch APIs at frontend (Frontend and API talking to each other)
 - Prepare frontend development to display live charts
     

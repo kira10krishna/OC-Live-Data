@@ -5,19 +5,18 @@ import math
 import pandas as pd
 import datetime
 import time
-import paths
-# import schedule
-import os
+import paths_logging
 import logging
+import os
 import traceback
 import plotly.graph_objs as go
 from plotly.subplots import make_subplots
 import ipywidgets as widgets
 from IPython.display import display
 import sqlite3
-
-#import tkinter as tk
-#from tkinter import messagebox
+# import schedule
+# import tkinter as tk
+# from tkinter import messagebox
 
 # Declaring variables
 columnsWanted = ['strikePrice', 'expiryDate', 'openInterest', 'changeinOpenInterest', 'pchangeinOpenInterest', 'totalTradedVolume', 'impliedVolatility', 'lastPrice', 'change', 'pChange','totalBuyQuantity', 'totalSellQuantity', 'underlyingValue']
@@ -38,15 +37,8 @@ headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/
             'accept-language': 'en,gu;q=0.9,hi;q=0.8',
             'accept-encoding': 'gzip, deflate, br'}
 
-
-# Set up the logging
-log_file_path = paths.log_file_path()
-logging.basicConfig(
-    filename=log_file_path,
-    level=logging.INFO,
-    format="%(asctime)s - %(levelname)s: %(message)s",
-    datefmt="%Y-%m-%d %H:%M:%S"  # Use the desired time format here
-    )
+# Set up logging config
+paths_logging.setup_logging()
 
 # session variables and methods
 sess = requests.Session()
@@ -306,7 +298,7 @@ def fetch_and_process_data(exp_date):
 # Export data to Excel method
 def export_to_excel(df, filename, expiry_date):
     # Create folder if excel file folder path does not exist
-    xl_folder_path = paths.create_xl_folder_path()
+    xl_folder_path = paths_logging.create_xl_folder_path()
     try:
         # Create the full file path
         file_path = os.path.join(xl_folder_path, f"{filename}_{expiry_date}.xlsx")
@@ -343,7 +335,7 @@ def is_market_open():
 
 # Function to store nf_SP and bnf_SP in the database
 def store_strike_prices(nf_SP, bnf_SP):
-    file_path = paths.create_db_folder_path()
+    file_path = paths_logging.create_db_folder_path()
     conn = sqlite3.connect(file_path)
     cursor = conn.cursor()
     # Create a table to store nf_SP and bnf_SP
@@ -410,6 +402,6 @@ def main():
 if __name__ == "__main__":
     # Start time for the script (9:00 AM) and end time (3:30 PM)
     start_time = datetime.time(9, 0)
-    end_time = datetime.time(10, 10)
+    end_time = datetime.time(10, 30)
     main()
 

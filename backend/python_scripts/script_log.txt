@@ -313,3 +313,24 @@ UnboundLocalError: local variable 'savedData_folder_path' referenced before assi
 2023-08-25 09:58:25 - INFO: Time elapsed to fetch and save Bank Nifty data = 0 seconds
 2023-08-25 09:58:25 - INFO: Total time elapsed = 1 seconds
 2023-08-25 09:58:25 - INFO: Sleep duration is set to = 58 seconds
+2023-08-25 10:12:10 - INFO: Fetching and processing data for ['31-Aug-2023', '07-Sep-2023', '28-Sep-2023']
+2023-08-25 10:12:10 - INFO: Fetching Nifty data...
+2023-08-25 10:12:11 - INFO: Time elapsed to fetch and save Nifty data = 1 seconds
+2023-08-25 10:12:11 - INFO: Fetching Bank Nifty data...
+2023-08-25 10:12:12 - INFO: Time elapsed to fetch and save Bank Nifty data = 0 seconds
+2023-08-25 10:12:12 - INFO: Total time elapsed = 2 seconds
+2023-08-25 10:12:12 - INFO: Sleep duration is set to = 57 seconds
+2023-08-25 10:13:40 - INFO: Fetching and processing data for ['31-Aug-2023', '07-Sep-2023', '28-Sep-2023']
+2023-08-25 10:13:40 - INFO: Fetching Nifty data...
+2023-08-25 10:13:41 - INFO: Time elapsed to fetch and save Nifty data = 1 seconds
+2023-08-25 10:13:41 - INFO: Fetching Bank Nifty data...
+2023-08-25 10:13:42 - INFO: Time elapsed to fetch and save Bank Nifty data = 0 seconds
+2023-08-25 10:13:42 - INFO: Total time elapsed = 2 seconds
+2023-08-25 10:13:42 - INFO: Sleep duration is set to = 57 seconds
+2023-08-25 10:26:08 - INFO: Fetching and processing data for ['31-Aug-2023', '07-Sep-2023', '28-Sep-2023']
+2023-08-25 10:26:08 - INFO: Fetching Nifty data...
+2023-08-25 10:26:09 - INFO: Time elapsed to fetch and save Nifty data = 1 seconds
+2023-08-25 10:26:09 - INFO: Fetching Bank Nifty data...
+2023-08-25 10:26:10 - INFO: Time elapsed to fetch and save Bank Nifty data = 1 seconds
+2023-08-25 10:26:10 - INFO: Total time elapsed = 2 seconds
+2023-08-25 10:26:10 - INFO: Sleep duration is set to = 57 seconds
