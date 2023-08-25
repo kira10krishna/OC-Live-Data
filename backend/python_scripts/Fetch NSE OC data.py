@@ -1,11 +1,10 @@
-# Libraries
+# Pre-defined Libraries
 import requests
 import json
 import math
 import pandas as pd
 import datetime
 import time
-import paths_logging
 import logging
 import os
 import traceback
@@ -18,90 +17,36 @@ import sqlite3
 # import tkinter as tk
 # from tkinter import messagebox
 
-# Declaring variables
-columnsWanted = ['strikePrice', 'expiryDate', 'openInterest', 'changeinOpenInterest', 'pchangeinOpenInterest', 'totalTradedVolume', 'impliedVolatility', 'lastPrice', 'change', 'pChange','totalBuyQuantity', 'totalSellQuantity', 'underlyingValue']
-number = 3
-step = {"nf":50, "bnf":100}
-stock = {"nf":"NIFTY 50","bnf":"NIFTY BANK"}
+# Defined Libraries
+import paths_logging
+import initializeVariables
+import sessionMethods
+import marketDataCalcs
+import expiryDateCalcs
 
-# Variables for Urls to fetch Data
-urls = {
-    "url_oc"      : "https://www.nseindia.com/option-chain",
-    "url_bnf"     : "https://www.nseindia.com/api/option-chain-indices?symbol=BANKNIFTY",
-    "url_nf"      : "https://www.nseindia.com/api/option-chain-indices?symbol=NIFTY",
-    "url_indices" : "https://www.nseindia.com/api/allIndices"
-    }
 
-# Headers
-headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36',
-            'accept-language': 'en,gu;q=0.9,hi;q=0.8',
-            'accept-encoding': 'gzip, deflate, br'}
+# Initialize Variables
+columnsWanted,number,step,stock,urls,headers = initializeVariables.initVars()
 
 # Set up logging config
 paths_logging.setup_logging()
 
 # session variables and methods
 sess = requests.Session()
-#cookies = dict()
 
-def set_cookie():
-    try:
-        request = sess.get(urls["url_oc"], headers=headers, timeout=5)
-        cookies = dict(request.cookies)
-        return cookies
-    except requests.exceptions.Timeout as e:
-        logging.error("Request timeout error: %s", e)
-        return None
-
-def make_request(url, cookies):
-    return sess.get(url, headers=headers, timeout=20, cookies=cookies)
-
-def get_data_with_retry(url, max_retries=5, retry_delay=2):
-    for attempt in range(max_retries):
-        if attempt > 0:
-            print("Retrying... Attempt =", attempt+1)
-            logging.info("Retrying... Attempt - %s", attempt+1)
-        try:
-            cookies = set_cookie()
-            if cookies: # is not None:
-                response = make_request(url, cookies)
-                if response.status_code == 200:
-                    #logging.info("Response data collected successfully in attempt %s", attempt)
-                    return response.text  # Return the response data if successful
-                else:
-                    # Retry for non-200 status codes
-                    logging.warning("Request returned non-200 status code: %s", response.status_code)                    
-        except requests.exceptions.Timeout as e:
-            logging.error("Request timeout error: %s", e)
-        except requests.exceptions.RequestException as e:
-            logging.error("Request error: %s", e)
-        except TypeError as e:
-            logging.error("Error fetching cookies: %s", e)
-        time.sleep(retry_delay)  # Wait for a few seconds before retrying
-
-    # If all retries failed, log an error and return an empty string
-    logging.error("Request failed after multiple retries.")
-    return ""
-
-
-# Method to get nearest strikes
-def round_nearest(x,num=50): return int(math.ceil(float(x)/num)*num)
-def nearest_strike_bnf(x): return round_nearest(x,step["bnf"])
-def nearest_strike_nf(x): return round_nearest(x,step["nf"])
-
-# Fetching Underlying data of given stock
+# Fetching Underlying and nearest SP data of given stock
 def set_header(stock):
     global ul
     global nearest
-    response_text = get_data_with_retry(urls["url_indices"])
+    response_text = sessionMethods.get_data_with_retry(urls["url_indices"])
     data = json.loads(response_text)
     for index in data["data"]:
         if index["index"]==stock:
             ul = index["last"]
     if stock =="NIFTY 50":
-        nearest=nearest_strike_nf(ul)
+        nearest = marketDataCalcs.nearest_strike_nf(ul)
     elif stock =="NIFTY BANK":
-        nearest=nearest_strike_bnf(ul)
+        nearest = marketDataCalcs.nearest_strike_bnf(ul)
     return nearest
 
     
@@ -109,7 +54,7 @@ def set_header(stock):
 def loadDataframes(num,step,nearest,expDate,url):
     strike = nearest - (step*num)
     start_strike = nearest - (step*num)
-    response_text = get_data_with_retry(url)
+    response_text = sessionMethods.get_data_with_retry(url)
     try:
         data = json.loads(response_text)
         df_list = []
@@ -144,94 +89,6 @@ def fetchData(num, step, stockIndex, indexUrl, expDate):
     nearest = set_header(stockIndex)
     df_list = loadDataframes(num, step, nearest, expDate, indexUrl)
     return nearest, df_list
-
-
-# Finding highest Open Interest of People's in CE based on CE data         
-def highest_oi_CE(num,step,nearest,url):
-    strike = nearest - (step*num)
-    start_strike = nearest - (step*num)
-    response_text = get_data_with_retry(url)
-    data = json.loads(response_text)
-    currExpiryDate = data["records"]["expiryDates"][0]
-    max_oi = 0
-    max_oi_strike = 0
-    for item in data['records']['data']:
-        if item["expiryDate"] == currExpiryDate:
-            if item["strikePrice"] == strike and item["strikePrice"] < start_strike+(step*num*2):
-                if item["CE"]["openInterest"] > max_oi:
-                    max_oi = item["CE"]["openInterest"]
-                    max_oi_strike = item["strikePrice"]
-                strike = strike + step
-    return max_oi_strike
-
-# Finding highest Open Interest of People's in PE based on PE data 
-def highest_oi_PE(num,step,nearest,url):
-    strike = nearest - (step*num)
-    start_strike = nearest - (step*num)
-    response_text = get_data_with_retry(url)
-    data = json.loads(response_text)
-    currExpiryDate = data["records"]["expiryDates"][0]
-    max_oi = 0
-    max_oi_strike = 0
-    for item in data['records']['data']:
-        if item["expiryDate"] == currExpiryDate:
-            if item["strikePrice"] == strike and item["strikePrice"] < start_strike+(step*num*2):
-                if item["PE"]["openInterest"] > max_oi:
-                    max_oi = item["PE"]["openInterest"]
-                    max_oi_strike = item["strikePrice"]
-                strike = strike + step
-    return max_oi_strike
-
-
-# Calculation of expiry dates
-def near_expiry():
-    #today = datetime.datetime.strptime("2023-08-3","%Y-%m-%d").date()
-    today = datetime.date.today()
-    current_weekday = today.weekday()
-    # Calculate the number of days until the next Thursday (Thursday is 3, 0=Monday, 1=Tuesday, ..., 6=Sunday)
-    days_until_thursday = (3 - current_weekday + 7) % 7
-    
-    # Calculate the date of the next Thursday
-    next_thursday = today + datetime.timedelta(days=days_until_thursday)
-    next_to_next_thursday = next_thursday + datetime.timedelta(days=7)
-    
-    return next_thursday.strftime("%d-%b-%Y"), next_to_next_thursday.strftime("%d-%b-%Y")
-
-def last_thursday_current_month(month = datetime.date.today().month):
-    if month == 0: month=12
-    #today = datetime.datetime.strptime("2023-06-3","%Y-%m-%d").date()
-    today = datetime.date.today()
-    year = today.year;
-
-    # Find the last day of the current month
-    last_day_of_month = datetime.date(year, month, 1) + datetime.timedelta(days=32)
-    last_day_of_month = last_day_of_month.replace(day=1) - datetime.timedelta(days=1)
-
-    # Find the weekday of the last day of the month (0 = Monday, 6 = Sunday)
-    last_weekday = last_day_of_month.weekday()
-
-    # Calculate the number of days to go back to reach the last Thursday
-    days_to_last_thursday = (last_weekday - 3 + 7) % 7
-
-    # Calculate the date of the last Thursday of the current month
-    last_thursday = last_day_of_month - datetime.timedelta(days=days_to_last_thursday)
-
-    return last_thursday.strftime("%d-%b-%Y")
-    
-def monthly_expiry():
-    near_expiry_date,next_expiry_date = near_expiry()
-    curr_month_last_thursday = last_thursday_current_month()
-    if (curr_month_last_thursday == near_expiry_date) or (curr_month_last_thursday == next_expiry_date):
-        monthly_expiry_date = last_thursday_current_month((datetime.date.today().month + 1)%12)
-        return monthly_expiry_date
-    else:
-        return curr_month_last_thursday
-
-def expiry_dates():
-    near_expiry_date,next_expiry_date = near_expiry()
-    monthly_expiry_date = monthly_expiry()
-    return [near_expiry_date, next_expiry_date, monthly_expiry_date]
-
 
 
 # Method to fetch and process data for Nifty and Bank Nifty
@@ -363,7 +220,7 @@ def main():
         wait_until_market_open()
         
         # Processing expiry dates
-        expiryDates = expiry_dates()
+        expiryDates = expiryDateCalcs.expiry_dates()
 
 
 
@@ -402,6 +259,6 @@ def main():
 if __name__ == "__main__":
     # Start time for the script (9:00 AM) and end time (3:30 PM)
     start_time = datetime.time(9, 0)
-    end_time = datetime.time(10, 30)
+    end_time = datetime.time(11, 45)
     main()
 
