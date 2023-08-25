@@ -207,8 +207,8 @@ def is_market_open(start_time, end_time):
 def main():
 
     try:
-        start_time = datetime.time(9, 0)
-        end_time = datetime.time(23, 55)
+        start_time = datetime.time(0, 1)
+        end_time = datetime.time(0, 20)
         # Wait until the market opens
         wait_until_market_open(start_time)
              

@@ -30,17 +30,28 @@ def index():
     return "Helleo, I am flask API, up and running."
 
 
-# main function
-def main_function():
-    # Call the function or code you want to execute in your main file
-    Fetch_NSE_OC_data.main()
-    print("Main function executed")
+class MainFunctionExecutor:
+    def __init__(self):
+        self.main_function_lock = threading.Lock()
+        self.main_function_executing = False
+
+    def main_function(self):
+        with self.main_function_lock:
+            if not self.main_function_executing:
+                self.main_function_executing = True
+                # Call the function or code you want to execute in your main file
+                Fetch_NSE_OC_data.main()
+                print("Main function executed")
+        self.main_function_executing = False
+
+# Create an instance of the MainFunctionExecutor
+main_executor = MainFunctionExecutor()
 
 
 @app.route('/run-main-code', methods=['GET','POST'])
 def run_main_code():
     # Run the main function in a separate thread
-    thread = threading.Thread(target=main_function)
+    thread = threading.Thread(target=main_executor.main_function)
     thread.start()
     if request.method == 'GET':
         # Your code to execute the main logic for a POST request
