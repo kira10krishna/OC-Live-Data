@@ -5,6 +5,7 @@ import math
 import pandas as pd
 import datetime
 import time
+import paths
 # import schedule
 import os
 import logging
@@ -39,7 +40,7 @@ headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/
 
 
 # Set up the logging
-log_file_path = os.path.join("backend","python_Scripts", "script_log.txt")
+log_file_path = paths.log_file_path()
 logging.basicConfig(
     filename=log_file_path,
     level=logging.INFO,
@@ -304,20 +305,11 @@ def fetch_and_process_data(exp_date):
 
 # Export data to Excel method
 def export_to_excel(df, filename, expiry_date):
-    # Create folder if Saved data folder does not exist
-    # folder_path = os.path.join("C:\\Users\\kira1\\Documents\\Python Scripts\\Saved Data", f"Data for {datetime.date.today().strftime('%d-%b-%Y')}")
-    folder_path = os.path.join("backend\\saved data", f"Data for {datetime.date.today().strftime('%d-%b-%Y')}")
-    if not os.path.exists(folder_path):
-        try:
-            os.makedirs(folder_path)
-            # print("Created 'Saved data' folder.")
-            logging.info("Created 'Saved data' folder.")
-        except Exception as e:
-            # print("Error creating 'Saved data' folder:", e)
-            logging.info("Error creating 'Saved data' folder: %s", e)
+    # Create folder if excel file folder path does not exist
+    xl_folder_path = paths.create_xl_folder_path()
     try:
         # Create the full file path
-        file_path = os.path.join(folder_path, f"{filename}_{expiry_date}.xlsx")
+        file_path = os.path.join(xl_folder_path, f"{filename}_{expiry_date}.xlsx")
 
         # Check if the Excel file already exists
         if os.path.exists(file_path):
@@ -351,19 +343,7 @@ def is_market_open():
 
 # Function to store nf_SP and bnf_SP in the database
 def store_strike_prices(nf_SP, bnf_SP):
-    current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    folder_path = os.path.join(current_dir,"DB files")
-    
-    if not os.path.exists(folder_path):
-        try:
-            os.makedirs(folder_path)
-            # print("Created 'DB files' folder.")
-            logging.info("Created 'DB files' folder.")
-        except Exception as e:
-            # print("Error creating 'Saved data' folder:", e)
-            logging.info("Error creating 'Saved data' folder: %s", e)
-
-    file_path = os.path.join(folder_path,'strike_prices.db')
+    file_path = paths.create_db_folder_path()
     conn = sqlite3.connect(file_path)
     cursor = conn.cursor()
     # Create a table to store nf_SP and bnf_SP
@@ -382,28 +362,6 @@ def store_strike_prices(nf_SP, bnf_SP):
     
     conn.commit()
     conn.close()
-
-# def fetch_strike_prices():
-#     try:
-#         current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-#         file_path = os.path.join(current_dir,"DB files",'strike_prices.db')
-#         conn = sqlite3.connect(file_path)
-#         cursor = conn.cursor()
-
-#         # Retrieve the nf_SP and bnf_SP values from the database
-#         cursor.execute('SELECT dateTime, nf_SP, bnf_SP FROM strike_prices ORDER BY dateTime DESC LIMIT 1')
-#         result = cursor.fetchone()
-
-#         conn.close()
-
-#         if result:
-#             dateTime, nf_SP, bnf_SP = result
-#             return dateTime, nf_SP, bnf_SP
-#         else:
-#             return None, None, None
-
-#     except Exception as e:
-#         raise e  # You can log or handle the exception as needed
 
 
 # Main function to fetch and process data
@@ -451,7 +409,7 @@ def main():
 
 if __name__ == "__main__":
     # Start time for the script (9:00 AM) and end time (3:30 PM)
-    start_time = datetime.time(0, 0)
-    end_time = datetime.time(0, 10)
+    start_time = datetime.time(9, 0)
+    end_time = datetime.time(10, 10)
     main()
 
