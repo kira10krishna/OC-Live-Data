@@ -34,8 +34,8 @@ Execute the following in order:
         - npm install
         - npm install axios react-plotly.js
     Step 3 : You must have 2 terminals for this -
-        To start Flask API run below command in /backend directory/:
-            - python app.py 
+        To start Flask API run below command in /backend/python_scripts directory/:
+            - python flaskAPI.py 
         To start react dev server run below command in /frontend directory/:
             - npm start
     
@@ -43,6 +43,16 @@ Execute the following in order:
 Note to self -
 - File name is static in app.py
 - Add logging for api requests
+- Build main python file in modular format
+
+Current actions:-
+- Build a modular code for python and API
+    - Log file config
+
+Next steps:-
+- Learn get method and also other methods of API
+- Connect API by frontend, i.e., Fetch APIs at frontend (Frontend and API talking to each other)
+- Prepare frontend development to display live charts
     
 
     

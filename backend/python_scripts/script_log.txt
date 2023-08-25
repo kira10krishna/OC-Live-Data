@@ -283,3 +283,54 @@ ValueError: too many values to unpack (expected 2)
 2023-08-25 00:02:54 - INFO: Time elapsed to fetch and save Bank Nifty data = 0 seconds
 2023-08-25 00:02:54 - INFO: Total time elapsed = 1 seconds
 2023-08-25 00:02:54 - INFO: Sleep duration is set to = 58 seconds
+2023-08-25 09:51:59 - INFO: Fetching and processing data for ['31-Aug-2023', '07-Sep-2023', '28-Sep-2023']
+2023-08-25 09:51:59 - INFO: Fetching Nifty data...
+2023-08-25 09:51:59 - ERROR: An error occurred in the main function: local variable 'savedData_folder_path' referenced before assignment
+2023-08-25 09:51:59 - ERROR: Traceback (most recent call last):
+  File "c:\Users\kira1\Documents\Git_Repos\OC-Live-Data\backend\python_scripts\Fetch NSE OC data.py", line 381, in main
+    nf_SP, bnf_SP = fetch_and_process_data(expiryDates)
+  File "c:\Users\kira1\Documents\Git_Repos\OC-Live-Data\backend\python_scripts\Fetch NSE OC data.py", line 257, in fetch_and_process_data
+    export_to_excel(df_nifty, "Nifty_Data", exp_date[i])
+  File "c:\Users\kira1\Documents\Git_Repos\OC-Live-Data\backend\python_scripts\Fetch NSE OC data.py", line 309, in export_to_excel
+    xl_folder_path = paths.create_xl_folder_path()
+  File "c:\Users\kira1\Documents\Git_Repos\OC-Live-Data\backend\python_scripts\paths.py", line 44, in create_xl_folder_path
+    savedData_folder_path = savedData_folder_path()
+UnboundLocalError: local variable 'savedData_folder_path' referenced before assignment
+
+2023-08-25 09:57:23 - INFO: Fetching and processing data for ['31-Aug-2023', '07-Sep-2023', '28-Sep-2023']
+2023-08-25 09:57:23 - INFO: Fetching Nifty data...
+2023-08-25 09:57:24 - INFO: Time elapsed to fetch and save Nifty data = 1 seconds
+2023-08-25 09:57:24 - INFO: Fetching Bank Nifty data...
+2023-08-25 09:57:29 - ERROR: Request timeout error: HTTPSConnectionPool(host='www.nseindia.com', port=443): Read timed out. (read timeout=5)
+2023-08-25 09:57:31 - INFO: Retrying... Attempt - 2
+2023-08-25 09:57:32 - INFO: Time elapsed to fetch and save Bank Nifty data = 7 seconds
+2023-08-25 09:57:32 - INFO: Total time elapsed = 9 seconds
+2023-08-25 09:57:32 - INFO: Sleep duration is set to = 50 seconds
+2023-08-25 09:58:23 - INFO: Fetching and processing data for ['31-Aug-2023', '07-Sep-2023', '28-Sep-2023']
+2023-08-25 09:58:23 - INFO: Fetching Nifty data...
+2023-08-25 09:58:24 - INFO: Time elapsed to fetch and save Nifty data = 0 seconds
+2023-08-25 09:58:24 - INFO: Fetching Bank Nifty data...
+2023-08-25 09:58:25 - INFO: Time elapsed to fetch and save Bank Nifty data = 0 seconds
+2023-08-25 09:58:25 - INFO: Total time elapsed = 1 seconds
+2023-08-25 09:58:25 - INFO: Sleep duration is set to = 58 seconds
+2023-08-25 10:12:10 - INFO: Fetching and processing data for ['31-Aug-2023', '07-Sep-2023', '28-Sep-2023']
+2023-08-25 10:12:10 - INFO: Fetching Nifty data...
+2023-08-25 10:12:11 - INFO: Time elapsed to fetch and save Nifty data = 1 seconds
+2023-08-25 10:12:11 - INFO: Fetching Bank Nifty data...
+2023-08-25 10:12:12 - INFO: Time elapsed to fetch and save Bank Nifty data = 0 seconds
+2023-08-25 10:12:12 - INFO: Total time elapsed = 2 seconds
+2023-08-25 10:12:12 - INFO: Sleep duration is set to = 57 seconds
+2023-08-25 10:13:40 - INFO: Fetching and processing data for ['31-Aug-2023', '07-Sep-2023', '28-Sep-2023']
+2023-08-25 10:13:40 - INFO: Fetching Nifty data...
+2023-08-25 10:13:41 - INFO: Time elapsed to fetch and save Nifty data = 1 seconds
+2023-08-25 10:13:41 - INFO: Fetching Bank Nifty data...
+2023-08-25 10:13:42 - INFO: Time elapsed to fetch and save Bank Nifty data = 0 seconds
+2023-08-25 10:13:42 - INFO: Total time elapsed = 2 seconds
+2023-08-25 10:13:42 - INFO: Sleep duration is set to = 57 seconds
+2023-08-25 10:26:08 - INFO: Fetching and processing data for ['31-Aug-2023', '07-Sep-2023', '28-Sep-2023']
+2023-08-25 10:26:08 - INFO: Fetching Nifty data...
+2023-08-25 10:26:09 - INFO: Time elapsed to fetch and save Nifty data = 1 seconds
+2023-08-25 10:26:09 - INFO: Fetching Bank Nifty data...
+2023-08-25 10:26:10 - INFO: Time elapsed to fetch and save Bank Nifty data = 1 seconds
+2023-08-25 10:26:10 - INFO: Total time elapsed = 2 seconds
+2023-08-25 10:26:10 - INFO: Sleep duration is set to = 57 seconds
