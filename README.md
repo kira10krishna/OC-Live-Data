@@ -3,19 +3,11 @@ Option chain live data display/save for each min whenever the market is open
 
 There are some excel files for daily analysis of Stock EOD Analysis and OC Live data (refreshed each min, not saved)
 
-What does this .ipynb it do ?
-- Running this programs saves the option chain live data every single minute with self adjusting sleep timer for a minute
-- Data is exported to excel file. Everyday a new excel file will be created
-- Data is saved within the "Save data" folder. If no folder is there then it creates one
-- Folder/File paths are given manually for now, due to personal use. Saved data folder is created inside "user/documents/Python Scripts"
+Building Backend (python), RestfulAPIs (flask, python) and Frontend (react)
 
-
-Upcoming Updates:
-- Adding hoidays list and excute program only on non-holidays
+Upcoming Updates (Maybe):
+- Add hoidays list and excute program only on non-holidays
 - Add progress bar widget
-- Make python application instead of jupyter notebook file
-- Display live charts through JS
-
 
 Just run the program and enjoy.
 
@@ -41,16 +33,21 @@ Execute the following in order:
     
 
 Note to self -
-- File name is static in app.py
 - Add logging for api requests
-- Build main python file in modular format
+
 
 Current actions:-
-- Build a modular code for python and API
-    - Log file config
+- Learn get method and also other methods of API (again)
+- Bugfix for static data fetching APIs (which gives error if hard coded excel file not found) These 2 are commented for now:- 
+        - /api/dfData
+        - /api/getChartData
+    => (Solution - Create an API endpoint to get exported excel files in each iteration)
+        => This variable should always contain the latest excel files that imported data
+- Learn API testing and test all APIs
+
 
 Next steps:-
-- Learn get method and also other methods of API
+- Check for all logging exceptions, place it wherever necessary
 - Connect API by frontend, i.e., Fetch APIs at frontend (Frontend and API talking to each other)
 - Prepare frontend development to display live charts
     
