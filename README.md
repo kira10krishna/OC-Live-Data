@@ -45,15 +45,19 @@ Note to self -
 - Add logging for api requests
 - Build main python file in modular format
 
+
 Current actions:-
-- Build a modular code for python and API
-    - Exporting data to excel
-    - Loading data in dataframes
-    - Fetch data functions
-    - finally main function
-    - Check for all logging exceptions, place it wherever necessary
+- Learn get method and also other methods of API (again)
+- Bugfix for static data fetching APIs :- 
+        - /api/dfData
+        - /api/getChartData
+    => (Solution - Create an API endpoint to get exported excel files in each iteration)
+        => This variable should always contain the latest excel files that imported data
+- Learn API testing and test all APIs
+
+
 Next steps:-
-- Learn get method and also other methods of API
+- Check for all logging exceptions, place it wherever necessary
 - Connect API by frontend, i.e., Fetch APIs at frontend (Frontend and API talking to each other)
 - Prepare frontend development to display live charts
     

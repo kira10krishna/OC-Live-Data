@@ -65,9 +65,9 @@ def run_main_code():
 
 
 # Read Excel data and convert to JSON
-folderPath = paths_logging.savedData_folder_path()
+folderPath = paths_logging.create_xl_folder_path()
 # Define a relative path to the Excel file
-file_path = os.path.join(folderPath, f"Data for {datetime.date.today().strftime('%d-%b-%Y')}", 'Nifty_Data_31-Aug-2023.xlsx')
+file_path = os.path.join(folderPath, 'Nifty_Data_31-Aug-2023.xlsx')
 
 df = pd.read_excel(file_path)
 df_json = df.to_json(orient="split")
