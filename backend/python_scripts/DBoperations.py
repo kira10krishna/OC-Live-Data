@@ -2,7 +2,7 @@
 import sqlite3
 
 # Defined Libraries
-import paths_logging
+from . import paths_logging
 
 
 file_path = paths_logging.create_db_folder_path()

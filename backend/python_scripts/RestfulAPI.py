@@ -4,17 +4,22 @@ import pandas as pd
 import datetime
 import requests
 import os
+import logging
 
 # Defined Libraries
-import paths_logging
-import DBoperations
+from . import paths_logging
+from . import DBoperations
 
 app = Flask(__name__)
+
+
+# Configure logging to print to the console
+logging.basicConfig(level=logging.DEBUG)
 
 # Define a route for the root URL ("/")
 @app.route('/')
 def index():
-    return "Hello, I am flask API, up  and running."
+    return "Helleo, I am flask API, up  and running."
 
 
 # Read Excel data and convert to JSON
