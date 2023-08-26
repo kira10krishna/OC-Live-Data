@@ -1,8 +1,8 @@
 # Pre-defined Libraries
 from flask import Flask, request, jsonify
 import pandas as pd
-import datetime
-import requests
+# import datetime
+# import requests
 import os
 import sys
 import threading
@@ -29,6 +29,9 @@ app = Flask(__name__)
 def index():
     return "Helleo, I am flask API, up and running."
 
+
+# Initialize the path manager
+path_manager = PathManager()
 
 # Initialize the SQLite database
 db_manager = DatabaseManager()
@@ -81,33 +84,35 @@ def get_strike_price():
         return jsonify({'error': 'An error occurred while processing your request'}), 500  # Return a 500 status code for server errors
 
 
+@app.route('/api/exported-excel-files', methods=['GET'])
+def get_exported_excel_files():
+    try:
+        # Specify the folder where Excel files are stored
+        xl_folder_path = path_manager.create_xl_folder_path()
+
+        # List all files in the folder
+        all_files = os.listdir(xl_folder_path)
+
+        # Filter for Excel files (if needed, you can add more specific file filtering logic)
+        excel_files = [f for f in all_files if f.endswith('.xlsx')]
+
+        # Sort files by modification time (most recent first)
+        excel_files.sort(key=lambda x: os.path.getmtime(os.path.join(xl_folder_path, x)), reverse=True)
+
+        # Get the names of the latest 6 Excel files
+        exported_files = excel_files[:6]
+
+        return jsonify({'latest_excel_files': exported_files})
+
+    except Exception as e:
+        return jsonify({'error': 'An error occurred while processing your request', 'Error message': e}), 500
+
+
+
 if __name__ == '__main__':
     app.run(host="127.0.0.1", port=5000, debug=True)
 
 
-
-
-
-# @app.route('/run-main-code', methods=['GET','POST'])
-# def run_main_code():
-#     # Run the main function in a separate thread
-#     thread = threading.Thread(target=main_executor.main_function)
-#     thread.start()
-#     if request.method == 'GET':
-#         # Your code to execute the main logic for a POST request
-#         return "Main code executed inside GET successfully"
-#     if request.method == 'POST':
-#         return "Main code executed inside POST successfully"
-#     else:
-#         return "Main code executed outside of POST and GET successfully"
-#     # else:
-#     #     return "Method other than POST not allowed for this endpoint"
-
-
-# # Read Excel data and convert to JSON
-# folderPath = paths_logging.create_xl_folder_path()
-# # Define a relative path to the Excel file
-# file_path = os.path.join(folderPath, 'Nifty_Data_31-Aug-2023.xlsx')
 
 # df = pd.read_excel(file_path)
 # df_json = df.to_json(orient="split")
