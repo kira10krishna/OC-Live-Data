@@ -100,9 +100,9 @@ def get_exported_excel_files():
         excel_files.sort(key=lambda x: os.path.getmtime(os.path.join(xl_folder_path, x)), reverse=True)
 
         # Get the names of the latest 6 Excel files
-        latest_files = excel_files[:6]
+        exported_files = excel_files[:6]
 
-        return jsonify({'latest_excel_files': latest_files})
+        return jsonify({'latest_excel_files': exported_files})
 
     except Exception as e:
         return jsonify({'error': 'An error occurred while processing your request', 'Error message': e}), 500
