@@ -9,9 +9,6 @@ Upcoming Updates (Maybe):
 - Add hoidays list and excute program only on non-holidays
 - Add progress bar widget
 
-Just run the program and enjoy.
-
-Feel free to comment on the code
 
 
 
@@ -31,20 +28,8 @@ Execute the following in order:
         - python flaskAPI.py 
     - To start react dev server run below command in /frontend directory/:
         - npm start
-    
-
-Note to self -
-- Add logging for api requests
 
 
-Current actions:-
-- Learn get method and also other methods of API (again)
-- Learn API testing and test all APIs
+Just run the program and enjoy.
 
-Next steps:-
-- Check for all logging exceptions, place it wherever necessary
-- Connect API by frontend, i.e., Fetch APIs at frontend (Frontend and API talking to each other)
-- Prepare frontend development to display live charts
-    
-
-    
+Feel free to comment on the code
