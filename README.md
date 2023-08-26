@@ -5,11 +5,8 @@ There are some excel files for daily analysis of Stock EOD Analysis and OC Live 
 
 Building Backend (python), RestfulAPIs (flask, python) and Frontend (react)
 
-Upcoming Updates (Maybe):
-- Add hoidays list and excute program only on non-holidays
-- Add progress bar widget
-
-
+Upcoming Updates :
+- Change Flask restfulAPI to FastAPI
 
 
 Execute the following in order:
