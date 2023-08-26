@@ -1,35 +1,38 @@
 import datetime
 
 class ExpiryCalculator:
-    def near_expiry(self):
-        today = datetime.date.today()
-        current_weekday = today.weekday()
-        days_until_thursday = (3 - current_weekday + 7) % 7
-        next_thursday = today + datetime.timedelta(days=days_until_thursday)
-        next_to_next_thursday = next_thursday + datetime.timedelta(days=7)
-        return next_thursday.strftime("%d-%b-%Y"), next_to_next_thursday.strftime("%d-%b-%Y")
-
-    def last_thursday_current_month(self, month=datetime.date.today().month):
-        if month == 0: month = 12
-        today = datetime.date.today()
-        year = today.year
-        last_day_of_month = datetime.date(year, month, 1) + datetime.timedelta(days=32)
-        last_day_of_month = last_day_of_month.replace(day=1) - datetime.timedelta(days=1)
-        last_weekday = last_day_of_month.weekday()
+    @staticmethod
+    def get_last_thursday_of_month(year, month):
+        last_day = datetime.date(year, month, 1) + datetime.timedelta(days=32)
+        last_day = last_day.replace(day=1) - datetime.timedelta(days=1)
+        last_weekday = last_day.weekday()
         days_to_last_thursday = (last_weekday - 3 + 7) % 7
-        last_thursday = last_day_of_month - datetime.timedelta(days=days_to_last_thursday)
-        return last_thursday.strftime("%d-%b-%Y")
+        return last_day - datetime.timedelta(days=days_to_last_thursday)
 
-    def monthly_expiry(self):
-        near_expiry_date, next_expiry_date = self.near_expiry()
-        curr_month_last_thursday = self.last_thursday_current_month()
-        if (curr_month_last_thursday == near_expiry_date) or (curr_month_last_thursday == next_expiry_date):
-            monthly_expiry_date = self.last_thursday_current_month((datetime.date.today().month + 1) % 12)
-            return monthly_expiry_date
+    @staticmethod
+    def get_next_thursday():
+        today = datetime.date.today()
+        days_until_thursday = (3 - today.weekday() + 7) % 7
+        return today + datetime.timedelta(days=days_until_thursday)
+
+    async def expiry_dates(self):
+        today = datetime.date.today()
+        near_expiry = self.get_next_thursday()
+        next_expiry = near_expiry + datetime.timedelta(days=7)
+        this_month_last_thursday = self.get_last_thursday_of_month(today.year, today.month)
+        next_month_last_thursday = self.get_last_thursday_of_month(today.year, (today.month + 1) % 12)
+
+        if this_month_last_thursday in [near_expiry, next_expiry]:
+            return [near_expiry.strftime("%d-%b-%Y"), next_expiry.strftime("%d-%b-%Y"), next_month_last_thursday.strftime("%d-%b-%Y")]
         else:
-            return curr_month_last_thursday
+            return [near_expiry.strftime("%d-%b-%Y"), next_expiry.strftime("%d-%b-%Y"), this_month_last_thursday.strftime("%d-%b-%Y")]
 
-    def expiry_dates(self):
-        near_expiry_date, next_expiry_date = self.near_expiry()
-        monthly_expiry_date = self.monthly_expiry()
-        return [near_expiry_date, next_expiry_date, monthly_expiry_date]
+# Usage:
+async def main():
+    calculator = ExpiryCalculator()
+    expiry_dates = await calculator.expiry_dates()
+    print(expiry_dates)
+
+if __name__ == "__main__":
+    import asyncio
+    asyncio.run(main())

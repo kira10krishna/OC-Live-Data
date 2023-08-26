@@ -21,5 +21,5 @@ class InitVars:
             'accept-encoding': 'gzip, deflate, br'
         }
 
-    def get_variables(self):
+    async def get_variables(self):
         return self.columnsWanted, self.number, self.step, self.stock, self.urls, self.headers
