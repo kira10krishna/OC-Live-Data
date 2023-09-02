@@ -1,11 +1,17 @@
 import asyncio
 import datetime
 import logging
+import os, sys
+
+ab_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../python_scripts'))
+sys.path.append(ab_path)
+
+import paths_logging
 
 class MarketTimings:
     def __init__(self):
-        self.start_time = datetime.time(0, 0)
-        self.end_time = datetime.time(1, 19)
+        self.start_time = datetime.time(8, 0)
+        self.end_time = datetime.time(10, 19)
         self.market_open_event = asyncio.Event()
 
     async def wait_until_market_open(self):
@@ -39,24 +45,20 @@ class MarketTimings:
 
 async def main():
     try:
-        logging.basicConfig(
-            filename="market_timings.log",
-            level=logging.INFO,
-            format="%(asctime)s - %(levelname)s: %(message)s",
-            datefmt="%Y-%m-%d %H:%M:%S"
-        )
+        paths_logging.PathManager()
 
         market_timings = MarketTimings()
 
         # Wait until the market opens
         await market_timings.wait_until_market_open()
-        logging.info("Market is now open!")
 
         # Check if the market is open
         is_open = await market_timings.is_market_open()
         if is_open:
+            print("The market is currently open.")
             logging.info("The market is currently open.")
         else:
+            print("The market is currently closed.")
             logging.info("The market is currently closed.")
     except Exception as e:
         logging.error(f"Error in main: {e}")

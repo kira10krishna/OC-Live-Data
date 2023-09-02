@@ -6,7 +6,6 @@ import asyncio
 class PathManager:
     def __init__(self):
         self.backend_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
         # Setup logging in the constructor
         self.setup_logging()
 

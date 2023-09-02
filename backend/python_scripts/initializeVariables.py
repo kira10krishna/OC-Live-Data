@@ -7,11 +7,13 @@ class InitVars:
         self.stock = {"nf": "NIFTY 50", "bnf": "NIFTY BANK"}
 
         # Variables for Urls to fetch Data
-        self.urls = {
-            "url_oc": "https://www.nseindia.com/option-chain",
-            "url_bnf": "https://www.nseindia.com/api/option-chain-indices?symbol=BANKNIFTY",
-            "url_nf": "https://www.nseindia.com/api/option-chain-indices?symbol=NIFTY",
-            "url_indices": "https://www.nseindia.com/api/allIndices"
+        self.headURL = {
+            "oc": "https://www.nseindia.com/option-chain",
+            "all_indices": "https://www.nseindia.com/api/allIndices"
+        }
+        self.apiURL = {
+            "bnf": "https://www.nseindia.com/api/option-chain-indices?symbol=BANKNIFTY",
+            "nf": "https://www.nseindia.com/api/option-chain-indices?symbol=NIFTY",
         }
 
         # Headers
@@ -21,5 +23,5 @@ class InitVars:
             'accept-encoding': 'gzip, deflate, br'
         }
 
-    async def get_variables(self):
-        return self.columnsWanted, self.number, self.step, self.stock, self.urls, self.headers
+    def get_variables(self):
+        return self.columnsWanted, self.number, self.step, self.stock, self.headURL, self.apiURL, self.headers
