@@ -12,8 +12,10 @@ class InitVars:
             "all_indices": "https://www.nseindia.com/api/allIndices"
         }
         self.apiURL = {
+            "all_indices": "https://www.nseindia.com/api/allIndices",
             "bnf": "https://www.nseindia.com/api/option-chain-indices?symbol=BANKNIFTY",
             "nf": "https://www.nseindia.com/api/option-chain-indices?symbol=NIFTY",
+
         }
 
         # Headers
@@ -23,5 +25,5 @@ class InitVars:
             'accept-encoding': 'gzip, deflate, br'
         }
 
-    def get_variables(self):
-        return self.columnsWanted, self.number, self.step, self.stock, self.headURL, self.apiURL, self.headers
+    async def get_variables(self):
+        return await self.columnsWanted, self.number, self.step, self.stock, self.headURL, self.apiURL, self.headers
