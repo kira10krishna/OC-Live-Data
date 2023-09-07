@@ -2,26 +2,29 @@ import aiohttp
 from aiohttp_retry import RetryClient, ExponentialRetry
 import asyncio as aio
 import logging
+import os, sys, time, json
+
+ab_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../python_scripts'))
+sys.path.append(ab_path)
+
+# Defined Libraries
+
 from paths_logging import PathManager
 from initializeVariables import InitVars
 
 
-# Set up logging config
-path_manager = PathManager()
-
 class SessionManager:
     def __init__(self):
         self.vars = InitVars()
-        # self.columnsWanted, self.number, self.step, self.stock, self.headURL, self.apiURL, self.headers = init_vars.get_variables()
         self.cookies = None
-        self.session = aiohttp.ClientSession()
+        self.session = None
 
 
     async def set_cookie(self):
         try:
             async with self.session.get(self.vars.headURL["oc"], headers=self.vars.headers, timeout=aiohttp.ClientTimeout(total=5)) as response:
                 self.cookies = response.cookies
-                await self.session.close()
+                # await self.session.close()
                 return self.cookies     
         except aiohttp.ClientError as e:
             logging.error("Request error in set_cookie: %s", e)
@@ -35,22 +38,27 @@ class SessionManager:
             async with retry_client.get(url, headers=self.vars.headers, cookies=self.cookies) as response:
                 response_text = await response.text()
                 if response_text:
-                    # print("Response text collected from", url)
-                    logging.info("Response text collected from %s", url)
+                    # print("json data collected from", url)
+                    logging.info("json data collected from %s", url)
                     return response_text
                 else:  
                     logging.warning("Request returned empty response.")     
         except aiohttp.ClientError as e:
-            print("Request error: %s", e)
+            # print("Request error: %s", e)
             logging.error("Request error: %s", e)
     
-    async def getAPIdata(self, urls):
+
+    async def getAPIdata(self, sIndexes):
         try:
-            cookies = await self.set_cookie()
-            if cookies:
-                async with aiohttp.ClientSession() as self.session:
-                    results = await aio.gather(*[self.getDataTasks(url) for url in urls], return_exceptions=True)
-                return results
+            async with aiohttp.ClientSession() as self.session:
+                async with aio.TaskGroup() as tg:
+                    cookies = await tg.create_task(self.set_cookie())
+                    if cookies:
+                        URLs = [self.vars.apiURL[sIndex] for sIndex in sIndexes]
+                        tasks = [(sIndex, self.getDataTasks(url)) for sIndex,url in zip(sIndexes,URLs)]
+                        results = await aio.gather(*[task[1] for task in tasks], return_exceptions=True)
+                        data_dict = {url: json.loads(result) for url, result in zip(sIndexes, results)}
+                        return data_dict
         except aiohttp.ClientError as e:
             logging.error("Request error: %s", e)
 
@@ -58,10 +66,17 @@ class SessionManager:
 
 # Define an asynchronous function to run the asyncio code
 async def main():
-    try:
+    try:   
+        # Set up logging config
+        PathManager()
+        start_fetch = time.time()
         session_manager = SessionManager()
-        URLs = [session_manager.vars.apiURL['nf'],session_manager.vars.apiURL['bnf']]
-        await session_manager.getAPIdata(URLs)
+        
+        res = await session_manager.getAPIdata(['all_indices','nf','bnf'])
+        print("Result =\n",res.keys())
+        end_fetch = time.time()
+        elapsed_time = end_fetch - start_fetch
+        print("Total time elapsed =", elapsed_time, "seconds")
     finally:
         # Don't manually close the session here if you're using asyncio.run()
         pass
